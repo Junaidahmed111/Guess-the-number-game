@@ -24,7 +24,7 @@ export default PrimaryButton;
 const styles = StyleSheet.create({
   buttonInnerContainer: {
     paddingHorizontal: 16,
-    paddingVertical: 81,
+    paddingVertical: 8,
     elevation: 4,
     backgroundColor: "red",
   },
