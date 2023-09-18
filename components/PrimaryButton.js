@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
   buttonInnerContainer: {
     paddingHorizontal: 16,
     paddingVertical: 8,
-    elevation: 4,
+    // elevation: 4,
     backgroundColor: "red",
   },
   buttonOuterContainer: {
