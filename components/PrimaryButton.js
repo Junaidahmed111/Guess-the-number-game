@@ -7,7 +7,7 @@ function PrimaryButton({ children }) {
   return (
     <View style={styles.buttonOuterContainer}>
       <Pressable
-        style={({pressed}) =>
+        style={({ pressed }) =>
           pressed
             ? [styles.buttonInnerContainer, styles.pressed]
             : styles.buttonInnerContainer
@@ -24,7 +24,7 @@ export default PrimaryButton;
 const styles = StyleSheet.create({
   buttonInnerContainer: {
     paddingHorizontal: 16,
-    paddingVertical: 8,
+    paddingVertical: 81,
     elevation: 4,
     backgroundColor: "red",
   },
