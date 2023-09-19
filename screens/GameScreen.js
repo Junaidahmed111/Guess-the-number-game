@@ -5,6 +5,7 @@ import NumberContainer from "../components/game/NumberContainer";
 import PrimaryButton from "../components/ui/PrimaryButton";
 import Card from "../components/ui/Card";
 import TheinstrText from "../components/ui/TheinstrText";
+import { Ionicons } from "@expo/vector-icons";
 function generateRandomBetween(min, max, exlude) {
   const rndNum = Math.floor(Math.random() * (max - min)) + min;
   if (rndNum === exlude) {
@@ -25,6 +26,10 @@ function GameScreen({ userNumber, onGameOver }) {
       onGameOver();
     }
   }, [currentGuess, userNumber, onGameOver]);
+  useEffect(() => {
+    minBoundary = 1;
+    maxBoundary = 100;
+  }, []);
 
   function nextGuessHandler(direction) {
     if (
@@ -54,14 +59,20 @@ function GameScreen({ userNumber, onGameOver }) {
       <Title>Opponents Score</Title>
       <NumberContainer>{currentGuess}</NumberContainer>
       <Card>
-        <TheinstrText>Higher or Lower?</TheinstrText>
-        <View>
-          <PrimaryButton onPressCustom={nextGuessHandler.bind(this, "lower")}>
-            -
-          </PrimaryButton>
-          <PrimaryButton onPressCustom={nextGuessHandler.bind(this, "greater")}>
-            +
-          </PrimaryButton>
+        <TheinstrText style1={styles.instText}>Higher or Lower?</TheinstrText>
+        <View style={styles.btnsContainer}>
+          <View style={styles.btnContainer}>
+            <PrimaryButton onPressCustom={nextGuessHandler.bind(this, "lower")}>
+              <Ionicons name="md-remove" size={24} color="white" />
+            </PrimaryButton>
+          </View>
+          <View style={styles.btnContainer}>
+            <PrimaryButton
+              onPressCustom={nextGuessHandler.bind(this, "greater")}
+            >
+              <Ionicons name="md-add" size={24} color="white" />
+            </PrimaryButton>
+          </View>
         </View>
       </Card>
       <View>
@@ -75,5 +86,14 @@ const styles = StyleSheet.create({
   screen: {
     flex: 1,
     padding: 24,
+  },
+  instText: {
+    marginBottom: 12,
+  },
+  btnsContainer: {
+    flexDirection: "row",
+  },
+  btnContainer: {
+    flex: 1,
   },
 });
