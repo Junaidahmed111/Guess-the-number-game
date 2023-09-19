@@ -1,7 +1,10 @@
-import { TextInput, View, StyleSheet, Alert } from "react-native";
+import { TextInput, View, StyleSheet, Alert, Text } from "react-native";
 import PrimaryButton from "../components/ui/PrimaryButton";
 import { useState } from "react";
 import Colors from "../contants/colors";
+import Title from "../components/ui/Title";
+import Card from "../components/ui/Card";
+import TheinstrText from "../components/ui/TheinstrText";
 function StartGameScreen({ onPickNumber }) {
   const [enteredNumber, setEnteredNumber] = useState("");
 
@@ -24,41 +27,43 @@ function StartGameScreen({ onPickNumber }) {
   }
 
   return (
-    <View style={styles.inputContainer}>
-      <TextInput
-        style={styles.numberInput}
-        maxLength={2}
-        keyboardType="number-pad"
-        autoCorrect={false}
-        autoCapitalize="none"
-        onChangeText={numberInputHandler}
-        value={enteredNumber}
-      />
-      <View style={styles.btnsContainer}>
-        <View style={styles.btnContainer}>
-          <PrimaryButton onPressCustom={resetInputHandler}>Reset</PrimaryButton>
+    <View style={styles.rootContainer}>
+      <Title>Guess My Number</Title>
+      <Card>
+        <TheinstrText>Enter a Number</TheinstrText>
+        <TextInput
+          style={styles.numberInput}
+          maxLength={2}
+          keyboardType="number-pad"
+          autoCorrect={false}
+          autoCapitalize="none"
+          onChangeText={numberInputHandler}
+          value={enteredNumber}
+        />
+        <View style={styles.btnsContainer}>
+          <View style={styles.btnContainer}>
+            <PrimaryButton onPressCustom={resetInputHandler}>
+              Reset
+            </PrimaryButton>
+          </View>
+          <View style={styles.btnContainer}>
+            <PrimaryButton onPressCustom={confirmInputHandler}>
+              Confirm
+            </PrimaryButton>
+          </View>
         </View>
-        <View style={styles.btnContainer}>
-          <PrimaryButton onPressCustom={confirmInputHandler}>
-            Confirm
-          </PrimaryButton>
-        </View>
-      </View>
+      </Card>
     </View>
   );
 }
 export default StartGameScreen;
 const styles = StyleSheet.create({
-  inputContainer: {
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 16,
+  rootContainer: {
+    flex: 1,
     marginTop: 100,
-    marginHorizontal: 24,
-    borderRadius: 8,
-    elevation: 8,
-    backgroundColor: Colors.primaryY,
+    alignItems: "center",
   },
+
   numberInput: {
     height: 50,
     fontSize: 32,
