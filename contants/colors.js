@@ -3,7 +3,7 @@ const Colors = {
   primaryY:'#E9AB17',
   primaryB:'#1a2a6c',
   primaryR:'#b21f1f',
-  primaryYf:'#fdbb2d'
+  primaryYf :'#fdbb2d'
 
 };
 export default Colors;
