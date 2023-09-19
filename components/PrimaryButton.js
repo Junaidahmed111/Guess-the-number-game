@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 8,
     elevation: 4,
-    backgroundColor: "red",
+    backgroundColor: "#333333",
   },
   buttonOuterContainer: {
     borderRadius: 28,
