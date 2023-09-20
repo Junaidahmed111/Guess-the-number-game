@@ -25,7 +25,7 @@ function GameScreen({ userNumber, onGameOver }) {
   const [guessRounds, setGuessRounds] = useState(initialGuess);
   useEffect(() => {
     if (currentGuess === userNumber) {
-      onGameOver();
+      onGameOver(guessRounds.length);
     }
   }, [currentGuess, userNumber, onGameOver]);
   useEffect(() => {
@@ -58,8 +58,9 @@ function GameScreen({ userNumber, onGameOver }) {
       newRndNumber, // Convert newRndNumber into an array with a single element
       ...(Array.isArray(previousGuessRounds) ? previousGuessRounds : []),
     ]);
-  } 
+  }
 
+  const guessRoundsListLength = guessRounds.length;
   return (
     <View style={styles.screen}>
       <Title>Opponents Score</Title>
@@ -81,13 +82,19 @@ function GameScreen({ userNumber, onGameOver }) {
           </View>
         </View>
       </Card>
-      <View>
-        {/* {guessRounds.map((guessRound) => (
-          <Text key={guessRound}>{guessRound}</Text>
-        ))} */}
+      <View style={styles.listContainer}>
         <FlatList
           data={guessRounds}
-          renderItem={(itemData) => <Text>{itemData.item}</Text>}
+          renderItem={(itemData) => (
+            <View style={styles.listItem}>
+              <Text style={styles.itemText}>
+                #{guessRoundsListLength - itemData.index}
+              </Text>
+              <Text style={styles.itemText}>
+                Opponent's Guess: {itemData.item}
+              </Text>
+            </View>
+          )}
           keyExtractor={(item) => item}
         />
       </View>
@@ -108,5 +115,30 @@ const styles = StyleSheet.create({
   },
   btnContainer: {
     flex: 1,
+  },
+  listContainer: {
+    flex: 1,
+    padding: 16,
+    height: 400,
+  },
+  listItem: {
+    borderColor: "yellow",
+    borderWidth: 1,
+    borderRadius: 40,
+    padding: 12,
+    marginVertical: 8,
+    backgroundColor: "black",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "100%",
+    elevation: 4,
+    shadowColor: "black",
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3,
+  },
+  itemText: {
+    color: "white",
+    fontFamily: "open-sans",
   },
 });
