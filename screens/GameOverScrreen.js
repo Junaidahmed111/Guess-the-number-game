@@ -39,8 +39,8 @@ function GameOverScrreen({ roundsNumber, userNumber, onStartNewGame }) {
           />
         </View>
         <Text style={styles.summaryText}>
-          Your phone needed <Text style={styles.highlight}>{roundsNumber}</Text> 
-          round to guess the number 
+          Your phone needed <Text style={styles.highlight}>{roundsNumber}</Text>
+          rounds to guess the number 
           <Text style={styles.highlight}>{userNumber}</Text>
         </Text>
         <PrimaryButton onPressCustom={onStartNewGame}>
