@@ -1,4 +1,11 @@
-import { Text, View, StyleSheet, Alert, FlatList } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  Alert,
+  FlatList,
+  useWindowDimensions,
+} from "react-native";
 import Title from "../components/ui/Title";
 import { useState, useEffect } from "react";
 import NumberContainer from "../components/game/NumberContainer";
@@ -60,19 +67,25 @@ function GameScreen({ userNumber, onGameOver }) {
     ]);
   }
 
-  const guessRoundsListLength = guessRounds.length;
-  return (
-    <View style={styles.screen}>
-      <Title>Opponents Score</Title>
-      <NumberContainer>{currentGuess}</NumberContainer>
+  const { height, width } = useWindowDimensions();
+  let content = (
+    <>
       <Card>
-        <TheinstrText style1={styles.instText}>Higher or Lower?</TheinstrText>
-        <View style={styles.btnsContainer}>
+        <View style={styles.btnsContainer}></View>
+      </Card>
+    </>
+  );
+
+  if (width > 500) {
+    content = (
+      <>
+        <View style={styles.btnsContainerWide}>
           <View style={styles.btnContainer}>
             <PrimaryButton onPressCustom={nextGuessHandler.bind(this, "lower")}>
               <Ionicons name="md-remove" size={24} color="white" />
             </PrimaryButton>
           </View>
+          <NumberContainer>{currentGuess}</NumberContainer>
           <View style={styles.btnContainer}>
             <PrimaryButton
               onPressCustom={nextGuessHandler.bind(this, "greater")}
@@ -81,7 +94,17 @@ function GameScreen({ userNumber, onGameOver }) {
             </PrimaryButton>
           </View>
         </View>
-      </Card>
+      </>
+    );
+  }
+
+  const guessRoundsListLength = guessRounds.length;
+  return (
+    <View style={styles.screen}>
+      <Title>Opponents Score</Title>
+      {content}
+      {/* <NumberContainer>{currentGuess}</NumberContainer> */}
+
       <View style={styles.listContainer}>
         <FlatList
           data={guessRounds}
@@ -106,7 +129,7 @@ const styles = StyleSheet.create({
   screen: {
     flex: 1,
     padding: 24,
-    alignItems: 'center',
+    alignItems: "center",
   },
   instText: {
     marginBottom: 12,
@@ -116,6 +139,10 @@ const styles = StyleSheet.create({
   },
   btnContainer: {
     flex: 1,
+  },
+  btnsContainerWide: {
+    flexDirection:'row',
+    alignItems: "center",
   },
   listContainer: {
     flex: 1,
